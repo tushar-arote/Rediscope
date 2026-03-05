@@ -13,6 +13,7 @@ use Rediscope\Formatter\Information;
 use Illuminate\Http\Request;
 use Illuminate\Redis\Connections\Connection;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 use Predis\Collection\Iterator\Keyspace;
 use Predis\Pipeline\Pipeline;
@@ -57,7 +58,7 @@ class Rediscope
      */
     public function __construct($connection = 'default')
     {
-        \Log::info($connection);
+        Log::info($connection);
         $this->connection = $connection;
     }
 

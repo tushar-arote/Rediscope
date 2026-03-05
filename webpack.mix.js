@@ -1,5 +1,6 @@
 const mix = require('laravel-mix');
 const webpack = require('webpack');
+const path = require('path');
 
 /*
  |--------------------------------------------------------------------------
@@ -12,17 +13,7 @@ const webpack = require('webpack');
  |
  */
 
-mix
-    .options({
-        uglify: {
-            uglifyOptions: {
-                compress: {
-                    drop_console: true,
-                }
-            }
-        }
-    })
-    .setPublicPath('public')
+mix.setPublicPath('public')
     .js('resources/js/app.js', 'public/')
     .sass('resources/sass/app.scss', 'public/')
     .sass('resources/sass/app-dark.scss', 'public/')
@@ -39,3 +30,7 @@ mix
             new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
         ],
     });
+
+if (mix.inProduction()) {
+    mix.minify(['public/app.js', 'public/app-dark.js']);
+}

@@ -2,6 +2,8 @@
 
 namespace Rediscope\DataType;
 
+use Illuminate\Support\Arr;
+
 class Lists extends DataType
 {
     /**
@@ -17,18 +19,18 @@ class Lists extends DataType
      */
     public function update(array $params)
     {
-        $key = array_get($params, 'key');
+        $key = Arr::get($params, 'key');
 
-        $action = array_get($params, 'action');
+        $action = Arr::get($params, 'action');
 
         if (in_array($action, ['lpush', 'rpush'])) {
-            $members = array_get($params, 'members');
+            $members = Arr::get($params, 'members');
             $this->getConnection()->{$action}($key, $members);
         }
 
         if ($action == 'lset') {
-            $value = array_get($params, 'value');
-            $index = array_get($params, 'index');
+            $value = Arr::get($params, 'value');
+            $index = Arr::get($params, 'index');
 
             $this->getConnection()->lset($key, $index, $value);
         }
@@ -39,10 +41,10 @@ class Lists extends DataType
      */
     public function store(array $params)
     {
-        $key = array_get($params, 'key');
-        $members = array_get($params, 'members');
-        $expire = array_get($params, 'expire');
-        $action = array_get($params, 'action', 'rpush');
+        $key = Arr::get($params, 'key');
+        $members = Arr::get($params, 'members');
+        $expire = Arr::get($params, 'expire');
+        $action = Arr::get($params, 'action', 'rpush');
 
         $members = array_column($members, 'value');
 
@@ -62,8 +64,8 @@ class Lists extends DataType
      */
     public function remove(array $params)
     {
-        $key = array_get($params, 'key');
-        $index = array_get($params, 'index');
+        $key = Arr::get($params, 'key');
+        $index = Arr::get($params, 'index');
 
         $lua = <<<'LUA'
 redis.call('lset', KEYS[1], ARGV[1], '__DELETED__');

@@ -2,6 +2,8 @@
 
 namespace Rediscope\DataType;
 
+use Illuminate\Support\Arr;
+
 class SortedSets extends DataType
 {
     /**
@@ -17,16 +19,16 @@ class SortedSets extends DataType
      */
     public function update(array $params)
     {
-        $key = array_get($params, 'key');
-        $member = array_get($params, 'member');
-        $action = array_get($params, 'action');
+        $key = Arr::get($params, 'key');
+        $member = Arr::get($params, 'member');
+        $action = Arr::get($params, 'action');
 
         if ($action === 'zrem') {
             $this->getConnection()->zrem($key, $member);
         }
 
         if ($action === 'zset') {
-            $score = array_get($params, 'score');
+            $score = Arr::get($params, 'score');
             $this->getConnection()->zadd($key, [$member => $score]);
         }
     }
@@ -36,9 +38,9 @@ class SortedSets extends DataType
      */
     public function store(array $params)
     {
-        $key = array_get($params, 'key');
-        $members = array_get($params, 'members');
-        $expire = array_get($params, 'expire');
+        $key = Arr::get($params, 'key');
+        $members = Arr::get($params, 'members');
+        $expire = Arr::get($params, 'expire');
 
         $fields = [];
 
@@ -62,8 +64,8 @@ class SortedSets extends DataType
      */
     public function remove(array $params)
     {
-        $key = array_get($params, 'key');
-        $member = array_get($params, 'member');
+        $key = Arr::get($params, 'key');
+        $member = Arr::get($params, 'member');
 
         return $this->getConnection()->zrem($key, $member);
     }
