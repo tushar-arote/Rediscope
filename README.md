@@ -190,12 +190,6 @@ php vendor/bin/phpunit
 | 2.0 | 8.1+ | 8, 9, 10, 11 | ✅ Current |
 | 1.0 | 7.2+ | 6, 7 | 🔄 Legacy |
 
-## 📚 Documentation
-
-For detailed documentation, migration guides, and API reference, see:
-- [UPGRADE_SUMMARY.md](UPGRADE_SUMMARY.md) - Version 2.0 upgrade details
-- [DETAILED_CHANGELOG.md](DETAILED_CHANGELOG.md) - Complete changelog
-
 ## 🐛 Troubleshooting
 
 ### Rediscope Dashboard Not Loading
