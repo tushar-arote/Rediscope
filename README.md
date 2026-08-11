@@ -209,15 +209,9 @@ Assets are served by the package itself at `/vendor/rediscope/*`, with no build 
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit issues and pull requests.
+Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, testing, and PR guidelines.
 
-### Development Setup
-
-1. Clone the repository
-2. Run `composer install` and `npm install`
-3. Create a feature branch
-4. Make your changes
-5. Submit a pull request
+Found a vulnerability? Please see [SECURITY.md](SECURITY.md) instead of opening a public issue.
 
 ## 📄 License
 
