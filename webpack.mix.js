@@ -15,10 +15,10 @@ const path = require('path');
 
 mix.setPublicPath('public')
     .js('resources/js/app.js', 'public/')
+    .vue({ version: 2 })
     .sass('resources/sass/app.scss', 'public/')
     .sass('resources/sass/app-dark.scss', 'public/')
     .version()
-    .copy('public', '../../../public/vendor/rediscope')
     .webpackConfig({
         resolve: {
             symlinks: false,
@@ -27,10 +27,6 @@ mix.setPublicPath('public')
             }
         },
         plugins: [
-            new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+            new webpack.IgnorePlugin({ resourceRegExp: /^\.\/locale$/, contextRegExp: /moment$/ })
         ],
     });
-
-if (mix.inProduction()) {
-    mix.minify(['public/app.js', 'public/app-dark.js']);
-}

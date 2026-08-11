@@ -57,4 +57,11 @@ class RouteTest extends FeatureTestCase
             route('rediscope')
         );
     }
+
+    public function test_scan_treats_the_literal_string_null_as_the_default_connection()
+    {
+        $this->get('/rediscope/api/scan?conn=null&pattern=')
+            ->assertStatus(200)
+            ->assertSuccessful();
+    }
 }

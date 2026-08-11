@@ -1,19 +1,27 @@
-# Rediscope
+<p align="center">
+  <img src="art/logo.png" width="100" alt="Rediscope logo">
+</p>
+
+<h1 align="center">Rediscope</h1>
 
 <p align="center">
   <strong>A Modern Redis UI for Laravel Applications</strong>
 </p>
 
 <p align="center">
-  <a href="https://github.com/tushar-arote/rediscope/actions"><img src="https://github.com/tushar-arote/rediscope/workflows/tests/badge.svg" alt="Build Status"></a>  
-  <a href="https://packagist.org/packages/tushar-arote/rediscope"><img src="https://poser.pugx.org/tushar-arote/rediscope/d/total.svg" alt="Total Downloads"></a>
-  <a href="https://packagist.org/packages/tushar-arote/rediscope"><img src="https://poser.pugx.org/tushar-arote/rediscope/v/unstable.svg" alt="Latest Unstable Version"></a>
-  <a href="https://packagist.org/packages/tushar-arote/rediscope"><img src="https://poser.pugx.org/tushar-arote/rediscope/license.svg" alt="License"></a>
+  <a href="https://github.com/tushar-arote/Rediscope/actions"><img src="https://img.shields.io/github/actions/workflow/status/tushar-arote/Rediscope/tests.yml?branch=master&label=tests" alt="Build Status"></a>
+  <a href="https://packagist.org/packages/tushar-arote/rediscope"><img src="https://img.shields.io/packagist/v/tushar-arote/rediscope" alt="Latest Version"></a>
+  <a href="https://packagist.org/packages/tushar-arote/rediscope"><img src="https://img.shields.io/packagist/dt/tushar-arote/rediscope" alt="Total Downloads"></a>
+  <a href="https://packagist.org/packages/tushar-arote/rediscope"><img src="https://img.shields.io/packagist/l/tushar-arote/rediscope" alt="License"></a>
 </p>
 
 ## 📋 Introduction
 
 Rediscope is a powerful, elegant Redis cache manager and UI for the Laravel framework. It provides an intuitive web interface to manage, monitor, and interact with Redis data structures in real-time.
+
+<p align="center">
+  <img src="art/screenshot.png" alt="Rediscope keys dashboard" width="800">
+</p>
 
 ### ✨ Features
 
@@ -31,6 +39,7 @@ Rediscope is a powerful, elegant Redis cache manager and UI for the Laravel fram
 - **PHP**: 8.1, 8.2, 8.3, or 8.4
 - **Laravel**: 8.0, 9.0, 10.0, 11.0, or 12.0
 - **Redis**: 4.0 or higher
+- **Redis client**: [predis/predis](https://github.com/predis/predis) — Rediscope uses Laravel's `Redis` facade against the `predis` client. Fresh Laravel 11/12 apps default `REDIS_CLIENT` to `phpredis` in `.env`; set `REDIS_CLIENT=predis` (and `composer require predis/predis` if not already installed) or Rediscope won't be able to connect.
 
 ## 📦 Installation
 
@@ -43,12 +52,12 @@ composer require tushar-arote/rediscope
 ### Step 2: Publish Configuration (Optional)
 
 ```bash
-php artisan vendor:publish --provider="Rediscope\RediscopeServiceProvider"
+php artisan vendor:publish --provider="Rediscope\RediscopeServiceProvider" --tag="rediscope-config"
 ```
 
-This publishes the configuration file to `config/rediscope.php`.
+This publishes the configuration file to `config/rediscope.php`. Skip this step if you're happy with the defaults — Rediscope works out of the box without it.
 
-Frontend assets are served directly by the package, so there's no build step required after `composer require`.
+Frontend assets (including the favicon) are served directly by the package, so there's no build step required after `composer require`.
 
 ### Step 3: Configure Authorization (Optional)
 
@@ -192,6 +201,7 @@ php vendor/bin/phpunit
 1. Verify Redis is running: `redis-cli ping`
 2. Check Laravel Redis configuration in `config/database.php`
 3. Clear application cache: `php artisan cache:clear`
+4. Confirm `REDIS_CLIENT=predis` in `.env` — fresh Laravel 11/12 apps default to `phpredis`, which Rediscope doesn't use (see Requirements above)
 
 ### Authentication Issues
 

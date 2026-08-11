@@ -30,6 +30,18 @@ class AssetControllerTest extends FeatureTestCase
         );
     }
 
+    public function test_it_serves_favicon_ico_without_requiring_a_publish_step()
+    {
+        $response = $this->get('/vendor/rediscope/favicon.ico');
+
+        $response->assertStatus(200);
+        $response->assertHeader('Content-Type', 'image/x-icon');
+        $this->assertSame(
+            file_get_contents(__DIR__.'/../../public/favicon.ico'),
+            $response->getContent()
+        );
+    }
+
     public function test_it_returns_404_for_a_missing_asset()
     {
         $response = $this->get('/vendor/rediscope/does-not-exist.js');

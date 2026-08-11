@@ -22,6 +22,10 @@ class RediscopeServiceProvider extends ServiceProvider
         $this->loadViewsFrom(
             __DIR__ . '/../resources/views', 'rediscope'
         );
+
+        $this->publishes([
+            __DIR__ . '/../config/rediscope.php' => config_path('rediscope.php'),
+        ], 'rediscope-config');
     }
 
     /**
