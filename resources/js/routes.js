@@ -1,3 +1,7 @@
+import KeysPreview from './screens/keys/preview';
+import KeysIndex from './screens/keys/index';
+import InfoIndex from './screens/info/index';
+
 export default [
     {
         path: '/',
@@ -7,18 +11,18 @@ export default [
     {
         path: '/keys/:key',
         name: 'keys-preview',
-        component: require('./screens/keys/preview')
+        component: KeysPreview
     },
 
     {
         path: '/keys',
         name: 'Keys',
-        component: require('./screens/keys/index')
+        component: KeysIndex
     },
 
     {
         path: '/information',
         name: 'Information',
-        component: require('./screens/info/index')
+        component: InfoIndex
     },
 ];

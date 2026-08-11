@@ -5,6 +5,10 @@ import Routes from './routes';
 import VueRouter from 'vue-router';
 import VueJsonPretty from 'vue-json-pretty';
 import moment from 'moment-timezone';
+import Alert from './components/Alert.vue';
+import IndexScreen from './components/IndexScreen.vue';
+import PreviewScreen from './components/PreviewScreen.vue';
+import InformationScreen from './components/InformationScreen.vue';
 
 require('bootstrap');
 
@@ -28,10 +32,10 @@ const router = new VueRouter({
     base: window.Rediscope.path,
 });
 
-Vue.component('alert', require('./components/Alert.vue'));
-Vue.component('index-screen', require('./components/IndexScreen.vue'));
-Vue.component('preview-screen', require('./components/PreviewScreen.vue'));
-Vue.component('information-screen', require('./components/InformationScreen.vue'));
+Vue.component('alert', Alert);
+Vue.component('index-screen', IndexScreen);
+Vue.component('preview-screen', PreviewScreen);
+Vue.component('information-screen', InformationScreen);
 Vue.component('vue-json-pretty', VueJsonPretty);
 
 Vue.mixin(Base);

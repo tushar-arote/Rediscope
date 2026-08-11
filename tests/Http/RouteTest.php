@@ -28,6 +28,14 @@ class RouteTest extends FeatureTestCase
             ->assertSuccessful();
     }
 
+    public function test_connections_excludes_the_reserved_options_and_clusters_keys()
+    {
+        $response = $this->get('/rediscope/api/connections');
+
+        $response->assertJsonMissing(['options']);
+        $response->assertJsonMissing(['clusters']);
+    }
+
     private function registerAssertJsonExactFragmentMacro()
     {
         $assertion = function ($expected, $key) {

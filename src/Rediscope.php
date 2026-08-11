@@ -127,7 +127,7 @@ class Rediscope
      */
     public function getConnections()
     {
-        return collect(config('database.redis'))->filter(function ($conn) {
+        return collect(config('database.redis'))->except(['options', 'clusters'])->filter(function ($conn) {
             return is_array($conn);
         });
     }

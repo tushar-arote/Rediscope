@@ -18,11 +18,7 @@ class RedisManagerController extends Controller
      */
     public function connections()
     {
-        $config = config('database.redis');
-
-        return collect($config)->filter(function ($conn) {
-            return is_array($conn);
-        })->keys();
+        return Rediscope::instance()->getConnections()->keys();
     }
 
     /**
