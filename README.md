@@ -25,14 +25,11 @@ Rediscope is a powerful, elegant Redis cache manager and UI for the Laravel fram
 
 ### ✨ Features
 
-- **Redis Management**: View, create, edit, and delete Redis keys effortlessly
-- **Data Type Support**: Full support for Strings, Hashes, Lists, Sets, and Sorted Sets
-- **Key Scanning**: Efficiently scan Redis keys with pattern matching
-- **TTL Management**: View and manage key expiration times
-- **Real-time Monitoring**: View Redis server information and statistics
-- **Dark Mode**: Beautiful dark theme for comfortable viewing
-- **Responsive UI**: Works seamlessly on desktop and mobile devices
-- **Type-Safe**: Modern PHP 8.1+ and Laravel 8-11 support
+- View, create, edit, and delete keys across **Strings, Hashes, Lists, Sets, and Sorted Sets**
+- Scan keys with pattern matching, and view/manage TTLs
+- Real-time server info (memory, CPU, client connections, command stats)
+- Dark mode, with your preference remembered locally
+- Responsive UI that works on desktop and mobile
 
 ## 🚀 Requirements
 
@@ -94,63 +91,11 @@ After installation, access Rediscope at:
 http://your-app.local/rediscope
 ```
 
-### Key Operations
-
-#### View Keys
-- Navigate to the "Keys" section
-- Use the search bar to filter keys by pattern
-- Click any key to view its content
-
-#### Manage Strings
-- View string values
-- Edit values directly in the UI
-- Set expiration time (TTL)
-
-#### Manage Hashes
-- Add, edit, or remove hash fields
-- View all fields in a hash at once
-
-#### Manage Lists
-- Push and pop items from lists
-- Edit list items by index
-- View list length
-
-#### Manage Sets
-- Add and remove set members
-- View all members
-- Check set cardinality
-
-#### Manage Sorted Sets
-- Add, edit, and remove members with scores
-- Sort by score or member name
-- View range queries
-
-### Server Information
-
-The "Info" section displays:
-- Memory usage and statistics
-- CPU metrics
-- Client connections
-- Command statistics
-
-## 🎨 UI Features
-
-### Dark Mode
-Toggle dark mode using the theme switcher in the top-right corner. Your preference is remembered locally.
-
-### Responsive Design
-The interface is fully responsive and works on:
-- Desktop browsers (Chrome, Firefox, Safari, Edge)
-- Tablets
-- Mobile devices
+Browse and search keys in the "Keys" section, click any key to view or edit its content, and check the "Info" section for server memory/CPU/client/command statistics. Toggle dark mode using the theme switcher in the top-right corner — your preference is remembered locally.
 
 ## 🔐 Security
 
-### Authentication
-By default, Rediscope is only accessible in the `local` environment. In production, you **must** configure proper authentication using the `Rediscope::auth()` method.
-
-### Authorization
-Implement your own authorization logic to restrict access:
+By default, Rediscope is only accessible in the `local` environment. In production, you **must** configure authorization via `Rediscope::auth()` (see Step 3 above) — the callback can check anything (auth, roles, IP, etc.) since it just returns a boolean:
 
 ```php
 Rediscope::auth(function ($request) {
@@ -158,41 +103,7 @@ Rediscope::auth(function ($request) {
 });
 ```
 
-## 🛠️ Development
-
-### Building Assets
-
-```bash
-# Development build with watch
-npm run watch
-
-# Production build
-npm run prod
-
-# Hot reload development
-npm run hot
-```
-
-### Running Tests
-
-```bash
-php vendor/bin/phpunit
-```
-
-## 📋 Supported Redis Data Types
-
-- ✅ **Strings** - Simple key-value storage
-- ✅ **Hashes** - Field-value pairs
-- ✅ **Lists** - Ordered collections
-- ✅ **Sets** - Unordered unique collections
-- ✅ **Sorted Sets** - Scored members
-
-## 🔄 Version Support
-
-| Version | PHP | Laravel | Status |
-|---------|-----|---------|--------|
-| 2.0 | 8.1 - 8.4 | 8, 9, 10, 11, 12 | ✅ Current |
-| 1.0 | 7.2+ | 6, 7 | 🔄 Legacy |
+Found a vulnerability? Please see [SECURITY.md](SECURITY.md) instead of opening a public issue.
 
 ## 🐛 Troubleshooting
 
@@ -217,35 +128,16 @@ Assets are served by the package itself at `/vendor/rediscope/*`, with no build 
 2. Clear the route cache: `php artisan route:clear`
 3. Check for a conflicting route or middleware intercepting `/vendor/rediscope/*`
 
-## 🤝 Contributing
+## 🤝 Contributing & Support
 
-Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, testing, and PR guidelines.
-
-Found a vulnerability? Please see [SECURITY.md](SECURITY.md) instead of opening a public issue.
+Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for dev setup, running tests, and PR guidelines. For bugs or questions, [open an issue on GitHub](https://github.com/tushar-arote/rediscope/issues) with reproduction steps.
 
 ## 📄 License
 
-The Rediscope package is open-sourced software licensed under the [MIT license](LICENSE.md).
+Open-sourced software licensed under the [MIT license](LICENSE.md).
 
 ## 👨‍💻 Author
 
-**Tushar Arote**
-- Email: tushararote123@gmail.com
-- GitHub: [@tushar-arote](https://github.com/tushar-arote)
+**Tushar Arote** — tushararote123@gmail.com — [@tushar-arote](https://github.com/tushar-arote)
 
-## 🙏 Acknowledgments
-
-- Inspired by [Laravel Telescope](https://laravel.com/docs/telescope)
-- Built with [Vue.js](https://vuejs.org/) and [Bootstrap 5](https://getbootstrap.com/)
-- Powered by [Predis](https://github.com/predis/predis)
-
-## 📞 Support
-
-For issues, questions, or suggestions:
-1. Open an issue on [GitHub](https://github.com/tushar-arote/rediscope)
-2. Check existing issues first
-3. Provide detailed reproduction steps
-
----
-
-**Made with ❤️ for Laravel developers**
+Built with [Vue.js](https://vuejs.org/) and [Bootstrap](https://getbootstrap.com/), powered by [Predis](https://github.com/predis/predis).
