@@ -1,4 +1,8 @@
-# Rediscope
+<p align="center">
+  <img src="art/logo.png" width="100" alt="Rediscope logo">
+</p>
+
+<h1 align="center">Rediscope</h1>
 
 <p align="center">
   <strong>A Modern Redis UI for Laravel Applications</strong>
