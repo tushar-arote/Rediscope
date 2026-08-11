@@ -75,6 +75,8 @@ class Rediscope
             static::$instance = new static($connection);
         }
 
+        static::$instance->connection = $connection;
+
         return static::$instance;
     }
 
@@ -175,18 +177,29 @@ class Rediscope
     public function scan($pattern = '*', $count = 100)
     {
         $client = $this->getConnection();
+        $rawClient = $client->client();
         $keys = [];
 
         $pattern = '*'.$pattern.'*';
-        foreach (new Keyspace($client->client(), $pattern) as $item) {
+        foreach (new Keyspace($rawClient, $pattern) as $item) {
             $keys[] = $item;
 
             if (count($keys) == $count) {
                 break;
             }
         }
-        //$keys = iterator_to_array(new Keyspace($client->client(), $pattern));
+        //$keys = iterator_to_array(new Keyspace($rawClient, $pattern));
 
+        // Keys from the Keyspace iterator already include the connection's
+        // key prefix (if any), since it reads directly from Redis. Passing
+        // them to eval() as-is would have the prefix applied a second time,
+        // since Predis also prefixes EVAL's KEYS arguments - so it's
+        // stripped here and let eval() re-apply it once.
+        $prefix = optional($rawClient->getOptions()->prefix)->getPrefix() ?? '';
+
+        // Static Lua script sent to Redis's own EVAL command via Predis - no
+        // user input is interpolated into it, so this isn't an arbitrary
+        // code execution risk in this PHP process.
         $script = <<<'LUA'
             local type = redis.call('type', KEYS[1])
             local ttl = redis.call('ttl', KEYS[1])
@@ -194,9 +207,13 @@ class Rediscope
             return {KEYS[1], type, ttl, idletime}
 LUA;
 
-        $keys = $client->pipeline(function (Pipeline $pipe) use ($keys, $script) {
+        $keys = $rawClient->pipeline(function (Pipeline $pipe) use ($keys, $script, $prefix) {
             foreach ($keys as $key) {
-                $pipe->eval($script, 1, $key);
+                $unprefixedKey = $prefix && str_starts_with($key, $prefix)
+                    ? substr($key, strlen($prefix))
+                    : $key;
+
+                $pipe->eval($script, 1, $unprefixedKey);
             }
         });
 
