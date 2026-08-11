@@ -8,7 +8,6 @@ use Illuminate\Testing\TestResponse;
 use Rediscope\Http\Middleware\Authorize;
 use Orchestra\Testbench\Http\Middleware\VerifyCsrfToken;
 use PHPUnit\Framework\Assert as PHPUnit;
-use PHPUnit\Framework\Attributes\DataProvider;
 use Rediscope\Tests\FeatureTestCase;
 
 class RouteTest extends FeatureTestCase
@@ -22,17 +21,9 @@ class RouteTest extends FeatureTestCase
         $this->registerAssertJsonExactFragmentMacro();
     }
 
-    public static function rediscopeIndexRoutesProvider()
+    public function test_route()
     {
-        return [
-            'Connections' => ['/rediscope/api/connections'],
-        ];
-    }
-
-    #[DataProvider('rediscopeIndexRoutesProvider')]
-    public function test_route($endpoint)
-    {
-        $this->get($endpoint)
+        $this->get('/rediscope/api/connections')
             ->assertStatus(200)
             ->assertSuccessful();
     }
