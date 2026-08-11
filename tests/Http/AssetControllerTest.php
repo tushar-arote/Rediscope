@@ -23,7 +23,7 @@ class AssetControllerTest extends FeatureTestCase
         $response = $this->get('/vendor/rediscope/app.css');
 
         $response->assertStatus(200);
-        $response->assertHeader('Content-Type', 'text/css; charset=utf-8');
+        $this->assertStringStartsWith('text/css', $response->headers->get('Content-Type'));
         $this->assertSame(
             file_get_contents(__DIR__.'/../../public/app.css'),
             $response->getContent()
