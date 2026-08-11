@@ -19,7 +19,7 @@ class AssetController extends Controller
         $publicPath = realpath(__DIR__.'/../../../public');
         $assetPath = realpath($publicPath.'/'.$path);
 
-        if ($assetPath === false || ! str_starts_with($assetPath, $publicPath)) {
+        if ($assetPath === false || ! str_starts_with($assetPath, $publicPath.DIRECTORY_SEPARATOR)) {
             abort(404);
         }
 
