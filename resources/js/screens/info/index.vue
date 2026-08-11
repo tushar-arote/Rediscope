@@ -83,15 +83,15 @@
                     </li>
                 </ul>
                 <div class="code-bg p-4 mb-0 text-white">
-                    <vue-json-pretty :data="slotProps.entry.Server" :options="{maxDepth: 3}" v-if="currentTab=='Server'"></vue-json-pretty>
-                    <vue-json-pretty :data="slotProps.entry.Memory" :options="{maxDepth: 3}" v-if="currentTab=='Memory'"></vue-json-pretty>
-                    <vue-json-pretty :data="slotProps.entry.Clients" :options="{maxDepth: 3}" v-if="currentTab=='Clients'"></vue-json-pretty>
-                    <vue-json-pretty :data="slotProps.entry.CPU" :options="{maxDepth: 3}" v-if="currentTab=='CPU'"></vue-json-pretty>
-                    <vue-json-pretty :data="slotProps.entry.Stats" :options="{maxDepth: 3}" v-if="currentTab=='Stats'"></vue-json-pretty>
-                    <vue-json-pretty :data="slotProps.entry.Keyspace" :options="{maxDepth: 3}" v-if="currentTab=='Keyspace'"></vue-json-pretty>
-                    <vue-json-pretty :data="slotProps.entry.Replication" :options="{maxDepth: 3}" v-if="currentTab=='Replication'"></vue-json-pretty>                    <vue-json-pretty :data="slotProps.entry.Replication" :options="{maxDepth: 3}" v-if="currentTab=='Replication'"></vue-json-pretty>
-                    <vue-json-pretty :data="slotProps.entry.Persistence" :options="{maxDepth: 3}" v-if="currentTab=='Persistence'"></vue-json-pretty>
-                    <vue-json-pretty :data="slotProps.entry.Cluster" :options="{maxDepth: 3}" v-if="currentTab=='Cluster'"></vue-json-pretty>
+                    <vue-json-pretty :data="slotProps.entry.Server" :deep="3" v-if="currentTab=='Server'"></vue-json-pretty>
+                    <vue-json-pretty :data="slotProps.entry.Memory" :deep="3" v-if="currentTab=='Memory'"></vue-json-pretty>
+                    <vue-json-pretty :data="slotProps.entry.Clients" :deep="3" v-if="currentTab=='Clients'"></vue-json-pretty>
+                    <vue-json-pretty :data="slotProps.entry.CPU" :deep="3" v-if="currentTab=='CPU'"></vue-json-pretty>
+                    <vue-json-pretty :data="slotProps.entry.Stats" :deep="3" v-if="currentTab=='Stats'"></vue-json-pretty>
+                    <vue-json-pretty :data="slotProps.entry.Keyspace" :deep="3" v-if="currentTab=='Keyspace'"></vue-json-pretty>
+                    <vue-json-pretty :data="slotProps.entry.Replication" :deep="3" v-if="currentTab=='Replication'"></vue-json-pretty>                    <vue-json-pretty :data="slotProps.entry.Replication" :deep="3" v-if="currentTab=='Replication'"></vue-json-pretty>
+                    <vue-json-pretty :data="slotProps.entry.Persistence" :deep="3" v-if="currentTab=='Persistence'"></vue-json-pretty>
+                    <vue-json-pretty :data="slotProps.entry.Cluster" :deep="3" v-if="currentTab=='Cluster'"></vue-json-pretty>
                 </div>
             </div>
 

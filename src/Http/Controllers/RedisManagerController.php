@@ -169,7 +169,11 @@ class RedisManagerController extends Controller
      */
     protected function manager()
     {
-        $conn = \request()->get('conn') ?? 'default';
+        $conn = \request()->get('conn');
+
+        if (empty($conn) || $conn === 'null') {
+            $conn = 'default';
+        }
 
         return Rediscope::instance($conn);
     }
