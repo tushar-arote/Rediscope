@@ -4,6 +4,20 @@ All notable changes to this project are documented in this file, based on [Keep 
 
 ## [Unreleased]
 
+## [2.1.1] - 2026-08-11
+
+### Added
+- Dark/light theme toggle button in the header, persisted via `localStorage`
+
+### Fixed
+- **Critical**: dashboard rendered completely blank with no AJAX calls. `routes.js` and `app.js` used raw `require()` for `.vue` components, but the current Babel/webpack setup wraps their exports in an ES-module shape that only `import` unwraps — Vue Router and `Vue.component()` silently received the wrapper object instead of the component
+- Connection dropdown listed a bogus `"options"` entry — `Rediscope::getConnections()` and a duplicated implementation in `RedisManagerController::connections()` both matched Redis client config keys (`options`, `clusters`) as if they were connections
+- Deleting keys (individually or in bulk) silently did nothing — `bootstrap` was pinned to `^5.3.0` while the confirmation dialog used Bootstrap 4's jQuery `.modal()` API, which v5 removed, so the confirmation modal never opened
+- Header read "Redis Manager" instead of "Rediscope"; connection dropdown and info button touched the header edge (both side effects of the same Bootstrap version mismatch)
+
+### Changed
+- Trimmed duplicate content from the README
+
 ## [2.1.0] - 2026-08-11
 
 ### Added
