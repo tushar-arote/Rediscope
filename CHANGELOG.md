@@ -4,8 +4,19 @@ All notable changes to this project are documented in this file, based on [Keep 
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-08-11
+
 ### Added
-- `SECURITY.md`, `CONTRIBUTING.md`, issue/PR templates
+- `favicon.ico`, served via the same direct-asset route as the rest of the frontend
+- `publishes()` registration for the config file, so `vendor:publish --tag=rediscope-config` actually works
+- Logo and dashboard screenshot in the README
+- `SECURITY.md`, `CONTRIBUTING.md`, `CHANGELOG.md`, issue/PR templates, `FUNDING.yml`
+
+### Fixed
+- `npm install` was unresolvable from a clean checkout (`laravel-mix`, `popper.js`, and `vue-json-pretty` were pinned to versions that either never existed or don't support Vue 2)
+- `Rediscope::scan()` reported every key's type as `none` due to a key-prefix being applied twice before the `TYPE`/`TTL` lookup
+- `Rediscope::instance()` only honored the requested Redis connection on its first call in a process, ignoring it on every later call
+- `RedisManagerController::manager()` 500ing when the frontend sends the literal string `"null"` for the `conn` parameter
 
 ## [2.0.2] - 2026-08-11
 
