@@ -21,19 +21,9 @@ class RouteTest extends FeatureTestCase
         $this->registerAssertJsonExactFragmentMacro();
     }
 
-    public function rediscopeIndexRoutesProvider()
+    public function test_route()
     {
-        return [
-            'Connections' => ['/rediscope/api/connections'],
-        ];
-    }
-
-    /**
-     * @dataProvider rediscopeIndexRoutesProvider
-     */
-    public function test_route($endpoint)
-    {
-        $this->get($endpoint)
+        $this->get('/rediscope/api/connections')
             ->assertStatus(200)
             ->assertSuccessful();
     }

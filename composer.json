@@ -1,6 +1,8 @@
 {
     "name": "tushar-arote/rediscope",
-    "description": "An Laravel Telescope like UI for Z-Song RedisManager",
+    "description": "An Laravel Telescope like UI for RedisManager",
+    "keywords": ["laravel", "redis", "dashboard", "telescope", "package"],
+    "homepage": "https://github.com/tushar-arote/Rediscope",
     "license": "MIT",
     "authors": [
         {
@@ -8,17 +10,21 @@
             "email": "tushararote123@gmail.com"
         }
     ],
+    "support": {
+        "issues": "https://github.com/tushar-arote/Rediscope/issues",
+        "source": "https://github.com/tushar-arote/Rediscope"
+    },
     "require": {
-        "php": "^8.1",
+        "php": "^8.1|^8.2|^8.3|^8.4",
         "ext-json": "*",
-        "laravel/framework": "^8.0|^9.0|^10.0|^11.0",
+        "laravel/framework": "^8.0|^9.0|^10.0|^11.0|^12.0",
         "moontoast/math": "^1.1",
         "predis/predis": "^2.0",
-        "symfony/var-dumper": "^6.0|^7.0"
+        "symfony/var-dumper": "^5.4|^6.0|^7.0"
     },
     "require-dev": {
         "ext-gd": "*",
-        "orchestra/testbench": "^7.0|^8.0|^9.0"
+        "orchestra/testbench": "^6.0|^7.0|^8.0|^9.0|^10.0"
     },
     "autoload": {
         "psr-4": {

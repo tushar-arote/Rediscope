@@ -28,8 +28,8 @@ Rediscope is a powerful, elegant Redis cache manager and UI for the Laravel fram
 
 ## 🚀 Requirements
 
-- **PHP**: 8.1 or higher
-- **Laravel**: 8.0, 9.0, 10.0, or 11.0
+- **PHP**: 8.1, 8.2, 8.3, or 8.4
+- **Laravel**: 8.0, 9.0, 10.0, 11.0, or 12.0
 - **Redis**: 4.0 or higher
 - **Node.js**: 14.0 or higher (for building assets)
 
@@ -187,7 +187,7 @@ php vendor/bin/phpunit
 
 | Version | PHP | Laravel | Status |
 |---------|-----|---------|--------|
-| 2.0 | 8.1+ | 8, 9, 10, 11 | ✅ Current |
+| 2.0 | 8.1 - 8.4 | 8, 9, 10, 11, 12 | ✅ Current |
 | 1.0 | 7.2+ | 6, 7 | 🔄 Legacy |
 
 ## 🐛 Troubleshooting
