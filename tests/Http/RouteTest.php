@@ -8,6 +8,7 @@ use Illuminate\Testing\TestResponse;
 use Rediscope\Http\Middleware\Authorize;
 use Orchestra\Testbench\Http\Middleware\VerifyCsrfToken;
 use PHPUnit\Framework\Assert as PHPUnit;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Rediscope\Tests\FeatureTestCase;
 
 class RouteTest extends FeatureTestCase
@@ -28,9 +29,7 @@ class RouteTest extends FeatureTestCase
         ];
     }
 
-    /**
-     * @dataProvider rediscopeIndexRoutesProvider
-     */
+    #[DataProvider('rediscopeIndexRoutesProvider')]
     public function test_route($endpoint)
     {
         $this->get($endpoint)
