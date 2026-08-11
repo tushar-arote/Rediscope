@@ -4,10 +4,27 @@ namespace Rediscope\Http\Controllers;
 
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Symfony\Component\Mime\MimeTypes;
 
 class AssetController extends Controller
 {
+    /**
+     * Known asset extensions and their Content-Type. Content-sniffing
+     * (e.g. Symfony's MimeTypes) misidentifies CSS as text/plain, which
+     * browsers refuse to apply as a stylesheet.
+     *
+     * @var array<string, string>
+     */
+    private const MIME_TYPES = [
+        'css' => 'text/css',
+        'js' => 'application/javascript',
+        'map' => 'application/json',
+        'svg' => 'image/svg+xml',
+        'png' => 'image/png',
+        'ico' => 'image/x-icon',
+        'woff' => 'font/woff',
+        'woff2' => 'font/woff2',
+    ];
+
     /**
      * Serve a compiled frontend asset directly from the package,
      * so consumers don't need a vendor:publish step.
@@ -16,6 +33,12 @@ class AssetController extends Controller
      */
     public function index(string $path)
     {
+        $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+
+        if (! isset(self::MIME_TYPES[$extension])) {
+            abort(404);
+        }
+
         $publicPath = realpath(__DIR__.'/../../../public');
         $assetPath = realpath($publicPath.'/'.$path);
 
@@ -23,10 +46,8 @@ class AssetController extends Controller
             abort(404);
         }
 
-        $mimeType = MimeTypes::getDefault()->guessMimeType($assetPath) ?? 'application/octet-stream';
-
         return new Response(file_get_contents($assetPath), 200, [
-            'Content-Type' => $mimeType,
+            'Content-Type' => self::MIME_TYPES[$extension],
         ]);
     }
 }
