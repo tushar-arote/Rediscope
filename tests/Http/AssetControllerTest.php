@@ -11,6 +11,7 @@ class AssetControllerTest extends FeatureTestCase
         $response = $this->get('/vendor/rediscope/app.js');
 
         $response->assertStatus(200);
+        $response->assertHeader('Content-Type', 'application/javascript');
         $this->assertSame(
             file_get_contents(__DIR__.'/../../public/app.js'),
             $response->getContent()
@@ -22,6 +23,7 @@ class AssetControllerTest extends FeatureTestCase
         $response = $this->get('/vendor/rediscope/app.css');
 
         $response->assertStatus(200);
+        $response->assertHeader('Content-Type', 'text/css; charset=utf-8');
         $this->assertSame(
             file_get_contents(__DIR__.'/../../public/app.css'),
             $response->getContent()
