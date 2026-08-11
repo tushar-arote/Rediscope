@@ -19,6 +19,10 @@
 
 Rediscope is a powerful, elegant Redis cache manager and UI for the Laravel framework. It provides an intuitive web interface to manage, monitor, and interact with Redis data structures in real-time.
 
+<p align="center">
+  <img src="art/screenshot.png" alt="Rediscope keys dashboard" width="800">
+</p>
+
 ### ✨ Features
 
 - **Redis Management**: View, create, edit, and delete Redis keys effortlessly
