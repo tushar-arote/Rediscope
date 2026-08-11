@@ -17,6 +17,7 @@ class RediscopeServiceProvider extends ServiceProvider
         //Rediscope::night();
 
         $this->registerRoutes();
+        $this->registerAssetRoute();
 
         $this->loadViewsFrom(
             __DIR__ . '/../resources/views', 'rediscope'
@@ -45,6 +46,19 @@ class RediscopeServiceProvider extends ServiceProvider
         Route::group($this->routeConfiguration(), function () {
             $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         });
+    }
+
+    /**
+     * Register a route to serve the package's compiled frontend assets
+     * directly, so consumers don't need a vendor:publish step.
+     *
+     * @return void
+     */
+    private function registerAssetRoute()
+    {
+        Route::get('vendor/rediscope/{path}', [
+            \Rediscope\Http\Controllers\AssetController::class, 'index',
+        ])->where('path', '.*')->name('rediscope.asset');
     }
 
     /**
