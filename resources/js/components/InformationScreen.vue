@@ -46,7 +46,7 @@
 
         methods: {
             prepareEntry() {
-                document.title = this.title + " - Redis Manager";
+                document.title = this.title + " - Rediscope";
 
                 this.ready = false;
 

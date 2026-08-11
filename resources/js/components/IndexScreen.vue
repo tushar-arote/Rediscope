@@ -36,7 +36,7 @@
          */
         mounted() {
             console.log('in parent mounted');
-            document.title = this.title + " - Redis Manager";
+            document.title = this.title + " - Rediscope";
 
             this.initiateRedis();
         },

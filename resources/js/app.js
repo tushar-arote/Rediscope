@@ -20,7 +20,7 @@ if (token) {
 
 Vue.use(VueRouter);
 
-window.Popper = require('popper.js').default;
+window.Popper = require('popper.js');
 
 window.Bus = new Vue({ name: 'Bus' });
 
@@ -63,6 +63,7 @@ new Vue({
     mounted() {
         console.log('in app mounted');
         this.setDefaultConnection();
+        this.applyStoredTheme();
 
         axios.get('/' + Rediscope.path + '/api/connections'
         ).then(response => {
@@ -83,6 +84,29 @@ new Vue({
             this.current = localStorage.getItem("conn") || "default";
 
             //this.$redis.conn = this.current;
+        },
+
+        applyStoredTheme() {
+            const theme = localStorage.getItem("rediscope-theme") || "app";
+            const stylesheet = document.getElementById('rediscope-theme-stylesheet');
+
+            if (stylesheet) {
+                stylesheet.href = stylesheet.href.replace(/app(-dark)?\.css$/, theme + '.css');
+            }
+        },
+
+        toggleTheme() {
+            const stylesheet = document.getElementById('rediscope-theme-stylesheet');
+
+            if (!stylesheet) {
+                return;
+            }
+
+            const isDark = stylesheet.href.includes('app-dark.css');
+            const theme = isDark ? 'app' : 'app-dark';
+
+            stylesheet.href = stylesheet.href.replace(/app(-dark)?\.css$/, theme + '.css');
+            localStorage.setItem("rediscope-theme", theme);
         }
     }
 });
