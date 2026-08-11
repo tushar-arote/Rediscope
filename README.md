@@ -31,7 +31,6 @@ Rediscope is a powerful, elegant Redis cache manager and UI for the Laravel fram
 - **PHP**: 8.1, 8.2, 8.3, or 8.4
 - **Laravel**: 8.0, 9.0, 10.0, 11.0, or 12.0
 - **Redis**: 4.0 or higher
-- **Node.js**: 14.0 or higher (for building assets)
 
 ## 📦 Installation
 
@@ -49,13 +48,9 @@ php artisan vendor:publish --provider="Rediscope\RediscopeServiceProvider"
 
 This publishes the configuration file to `config/rediscope.php`.
 
-### Step 3: Build Frontend Assets
+Frontend assets are served directly by the package, so there's no build step required after `composer require`.
 
-```bash
-npm install && npm run prod
-```
-
-### Step 4: Configure Authorization (Optional)
+### Step 3: Configure Authorization (Optional)
 
 By default, Rediscope is only accessible in the `local` environment. To customize access, update your `AppServiceProvider`:
 
@@ -197,7 +192,6 @@ php vendor/bin/phpunit
 1. Verify Redis is running: `redis-cli ping`
 2. Check Laravel Redis configuration in `config/database.php`
 3. Clear application cache: `php artisan cache:clear`
-4. Rebuild assets: `npm run prod`
 
 ### Authentication Issues
 
@@ -207,9 +201,11 @@ php vendor/bin/phpunit
 
 ### Asset Loading Issues
 
-1. Run `npm install` and `npm run prod`
-2. Check web server document root
-3. Verify public path in `webpack.mix.js`
+Assets are served by the package itself at `/vendor/rediscope/*`, with no build step required. If they still don't load:
+
+1. Confirm `composer require tushar-arote/rediscope` completed successfully and `vendor/tushar-arote/rediscope/public/` contains `app.js`/`app.css`
+2. Clear the route cache: `php artisan route:clear`
+3. Check for a conflicting route or middleware intercepting `/vendor/rediscope/*`
 
 ## 🤝 Contributing
 
